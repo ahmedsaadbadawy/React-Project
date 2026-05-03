@@ -33,6 +33,7 @@ const Advice = () => {
         <span className="text-[#55FEAA] text-sm md:text-base">
           Advice #{advice.id}
         </span>
+        <h1 className="font-bold text-white md:text-2xl transition-all duration-700">"{advice.advice}"</h1>
         <div className="flex items-center justify-center">
           <span className="h-0.5 w-full bg-mist-600 "></span>
           <HugeiconsIcon
