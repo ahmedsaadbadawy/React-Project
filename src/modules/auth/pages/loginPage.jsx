@@ -15,10 +15,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export function LoginPage() {
+  let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!emailRegex.test(email)) {
+      alert("Wrong email!");
+      return;
+    }
     if (password === "the password") {
       console.log("Success!");
       sessionStorage.setItem("isAuthenticated", true);
@@ -41,7 +49,7 @@ export function LoginPage() {
           </CardAction>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={(e) => handleLogin(e)}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -49,8 +57,8 @@ export function LoginPage() {
                   id="email"
                   type="email"
                   placeholder="m@example.com"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
@@ -72,19 +80,16 @@ export function LoginPage() {
                 />
               </div>
             </div>
+            <CardFooter className="flex-col gap-2">
+              <Button type="submit" className="w-full cursor-pointer">
+                Login
+              </Button>
+              <Button variant="outline" className="w-full">
+                Login with Google
+              </Button>
+            </CardFooter>
           </form>
         </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Button
-            type="submit"
-            className="w-full cursor-pointer"
-            onClick={() => handleLogin()}>
-            Login
-          </Button>
-          <Button variant="outline" className="w-full">
-            Login with Google
-          </Button>
-        </CardFooter>
       </Card>
       <Badge className={"text-sm my-8"}>Password ={">"} the password</Badge>
       <Badge variant="destructive" className={"text-sm"}>
