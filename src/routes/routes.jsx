@@ -1,3 +1,4 @@
+import Advice from "@/hooks/advice";
 import { LoginPage } from "@/modules/auth/pages/loginPage";
 import AppLayout from "@/modules/layout/AppLayout";
 import { GuardAuth } from "@/modules/layout/guardAuth";
@@ -17,6 +18,10 @@ export const Routing = createBrowserRouter([
       {
         path: "/home",
         element: <HomePage />,
+      },
+      {
+        path: "/advice",
+        element: <Advice />,
       },
       {
         path: "/about",
