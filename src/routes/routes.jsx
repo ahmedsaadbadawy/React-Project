@@ -4,6 +4,7 @@ import AppLayout from "@/modules/layout/AppLayout";
 import { GuardAuth } from "@/modules/layout/guardAuth";
 import { AboutPage } from "@/pages/About";
 import { HomePage } from "@/pages/Home";
+import NotesPage from "@/pages/Notes";
 import { createBrowserRouter } from "react-router";
 
 export const Routing = createBrowserRouter([
@@ -22,6 +23,10 @@ export const Routing = createBrowserRouter([
       {
         path: "/advice",
         element: <Advice />,
+      },
+      {
+        path: "/notes",
+        element: <NotesPage />,
       },
       {
         path: "/about",

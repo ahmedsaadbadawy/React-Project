@@ -23,17 +23,17 @@ export function LoginPage() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!emailRegex.test(email)) {
-      alert("Wrong email!");
-      return;
-    }
-    if (password === "the password") {
+    // if (!emailRegex.test(email)) {
+    //   alert("Wrong email!");
+    //   return;
+    // }
+    // if (password === "the password") {
       console.log("Success!");
       sessionStorage.setItem("isAuthenticated", true);
       navigate("/home");
-    } else {
-      alert("Wrong password!");
-    }
+    // } else {
+    //   alert("Wrong password!");
+    // }
   };
 
   return (
@@ -59,7 +59,7 @@ export function LoginPage() {
                   placeholder="m@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
+                  // required
                 />
               </div>
               <div className="grid gap-2">
@@ -76,7 +76,7 @@ export function LoginPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
+                  // required
                 />
               </div>
             </div>
