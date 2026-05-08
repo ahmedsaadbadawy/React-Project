@@ -1,4 +1,5 @@
 import Advice from "@/hooks/advice";
+import NotesPageProvider from "@/hooks/NotesPageHook";
 import { LoginPage } from "@/modules/auth/pages/loginPage";
 import AppLayout from "@/modules/layout/AppLayout";
 import { GuardAuth } from "@/modules/layout/guardAuth";
@@ -26,7 +27,11 @@ export const Routing = createBrowserRouter([
       },
       {
         path: "/notes",
-        element: <NotesPage />,
+        element: (
+          <NotesPageProvider>
+            <NotesPage />
+          </NotesPageProvider>
+        ),
       },
       {
         path: "/about",
