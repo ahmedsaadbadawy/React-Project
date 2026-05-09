@@ -5,30 +5,12 @@ import { useReducer } from "react";
 export const notesPageContext = createContext();
 export function NotesPageProvider({ children }) {
   const initialState = {
-    noteTitle: null,
-    noteSub: null,
-    noteContent: null,
-    notes: [],
-    theme: "light",
+    notes: JSON.parse(localStorage.getItem("notes")) || [],
+    theme: JSON.parse(localStorage.getItem("theme")) ||"light",
   };
 
   function reducer(state, action) {
     switch (action.type) {
-      case "addNoteTitle":
-        return {
-          ...state,
-          noteTitle: action.payload,
-        };
-      case "addNoteSub":
-        return {
-          ...state,
-          noteSub: action.payload,
-        };
-      case "addNoteContent":
-        return {
-          ...state,
-          noteContent: action.payload,
-        };
       case "addNote":
         const newNotes = [...state.notes, action.payload];
         localStorage.setItem("notes", JSON.stringify(newNotes));
@@ -38,7 +20,7 @@ export function NotesPageProvider({ children }) {
         };
       case "deleteNote":
         const updatedNotes = state.notes.filter(
-          (note) => note.noteTitle !== action.payload,
+          (note) => note.id !== action.payload,
         );
         localStorage.setItem("notes", JSON.stringify(updatedNotes));
         return {
@@ -47,6 +29,7 @@ export function NotesPageProvider({ children }) {
         };
       case "changeTheme":
         const newTheme = state.theme === "light" ? "dark" : "light";
+        document.documentElement.className = newTheme;
         localStorage.setItem("theme", JSON.stringify(newTheme));
         return {
           ...state,
