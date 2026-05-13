@@ -1,17 +1,18 @@
 import React from "react";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
-import { useContext } from "react";
-import { notesPageContext } from "@/hooks/NotesPageHook";
 import { Button } from "../ui/button";
 import { useRef } from "react";
+import { useNotesPageStore } from "@/store/NotesPageStore";
 
-const NotesFormLayer = ({ onClose }) => {
+const NotesFormLayer = () => {
   const notesFormLayer = useRef(null);
   const noteTitleRef = useRef(null);
   const noteSubRef = useRef(null);
   const noteContentRef = useRef(null);
-  const { state, dispatch } = useContext(notesPageContext);
+  
+  const addNote = useNotesPageStore((state) => state.addNote);
+  const toggleForm = useNotesPageStore((state) => state.toggleForm);
 
   function handleAddNote(e) {
     e.preventDefault();
@@ -21,10 +22,8 @@ const NotesFormLayer = ({ onClose }) => {
       noteContent: noteContentRef.current.value,
       id: new Date().toLocaleString(),
     };
-    dispatch({ type: "addNote", payload: note });
-    console.log(state.notes);
-
-    onClose();
+    addNote(note);
+    toggleForm();
   }
   return (
     <div
@@ -65,7 +64,7 @@ const NotesFormLayer = ({ onClose }) => {
           </FieldGroup>
           <br />
           <Field orientation="horizontal" className="justify-end">
-            <Button variant="outline" type="button" onClick={() => onClose()}>
+            <Button variant="outline" type="button" onClick={() => toggleForm()}>
               Cancel
             </Button>
             <Button type="submit">Submit</Button>
